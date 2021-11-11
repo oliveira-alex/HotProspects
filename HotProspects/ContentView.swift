@@ -2,15 +2,41 @@
 //  ContentView.swift
 //  HotProspects
 //
-//  Created by Alex Oliveira on 11/11/21.
+//  Created by Alex Oliveira on 11/11/2021.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+class User: ObservableObject {
+    @Published var name = "Taylor Swift"
+}
+
+struct EditView: View {
+    @EnvironmentObject var user: User
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TextField("Name", text: $user.name)
+    }
+}
+
+struct DisplayView: View {
+    @EnvironmentObject var user: User
+    
+    var body: some View {
+        Text(user.name)
+    }
+}
+
+struct ContentView: View {
+    let user = User()
+    
+    var body: some View {
+        VStack {
+            // Children of ContentView
+            EditView()
+            DisplayView()
+        }
+        .environmentObject(user)
     }
 }
 
