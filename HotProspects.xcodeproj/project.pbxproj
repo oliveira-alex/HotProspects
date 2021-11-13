@@ -13,6 +13,7 @@
 		E7AAA63E273D3A2100B2F85A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7AAA63D273D3A2100B2F85A /* Preview Assets.xcassets */; };
 		E7AAA648274073A600B2F85A /* ProspectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAA647274073A600B2F85A /* ProspectsView.swift */; };
 		E7AAA64A274073B000B2F85A /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAA649274073B000B2F85A /* MeView.swift */; };
+		E7AAA64C2740779100B2F85A /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAA64B2740779100B2F85A /* Prospect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		E7AAA63D273D3A2100B2F85A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E7AAA647274073A600B2F85A /* ProspectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsView.swift; sourceTree = "<group>"; };
 		E7AAA649274073B000B2F85A /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
+		E7AAA64B2740779100B2F85A /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				E7AAA636273D3A2000B2F85A /* HotProspectsApp.swift */,
 				E7AAA638273D3A2000B2F85A /* ContentView.swift */,
 				E7AAA647274073A600B2F85A /* ProspectsView.swift */,
+				E7AAA64B2740779100B2F85A /* Prospect.swift */,
 				E7AAA649274073B000B2F85A /* MeView.swift */,
 				E7AAA63A273D3A2100B2F85A /* Assets.xcassets */,
 				E7AAA63C273D3A2100B2F85A /* Preview Content */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7AAA64A274073B000B2F85A /* MeView.swift in Sources */,
+				E7AAA64C2740779100B2F85A /* Prospect.swift in Sources */,
 				E7AAA648274073A600B2F85A /* ProspectsView.swift in Sources */,
 				E7AAA639273D3A2000B2F85A /* ContentView.swift in Sources */,
 				E7AAA637273D3A2000B2F85A /* HotProspectsApp.swift in Sources */,
