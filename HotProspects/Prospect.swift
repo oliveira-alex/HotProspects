@@ -40,6 +40,11 @@ class Prospects: ObservableObject {
         save()
     }
     
+    func remove(_ indexSet: IndexSet) {
+        people.remove(atOffsets: indexSet)
+        save()
+    }
+    
     func toggle(_ prospect: Prospect) {
         objectWillChange.send()
         prospect.isContacted.toggle()
