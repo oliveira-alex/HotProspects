@@ -17,7 +17,8 @@ class Prospect: Identifiable, Codable {
 class Prospects: ObservableObject {
     @Published private(set) var people: [Prospect]
     static let saveKey = "SavedData"
-    
+    var peopleBackup: [Prospect] = []
+
     init() {
         if let data = UserDefaults.standard.data(forKey: Self.saveKey) {
             if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
@@ -49,5 +50,12 @@ class Prospects: ObservableObject {
         objectWillChange.send()
         prospect.isContacted.toggle()
         save()
+        
+        // ContextMenu-Hack1. Without this, the list doesn't refresh after toggling isContacted
+//        peopleBackup = people
+//        people = []
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+//            self.people = self.peopleBackup
+//        }
     }
 }

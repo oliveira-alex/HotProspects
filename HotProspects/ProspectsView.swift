@@ -49,6 +49,7 @@ struct ProspectsView: View {
                             .font(.headline)
                         Text(prospect.emailAddress)
                             .foregroundColor(.secondary)
+                        Text(prospect.isContacted ? "Contacted" : "Uncontacted")
                     }
                     .contextMenu {
                         Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted") {
@@ -61,6 +62,7 @@ struct ProspectsView: View {
                             }
                         }
                     }
+                    .id(prospect.isContacted) // ContextMenu-Hack2. Without this, the list doesn't refresh after toggling isContacted
                 }
                 .onDelete(perform: self.prospects.remove)
             }
