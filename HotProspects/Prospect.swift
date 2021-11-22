@@ -15,24 +15,34 @@ class Prospect: Identifiable, Codable {
 }
 
 class Prospects: ObservableObject {
-    @Published private(set) var people: [Prospect]
+    @Published private(set) var people: [Prospect] = []
     static let saveKey = "SavedData"
-    var peopleBackup: [Prospect] = []
+//    var peopleBackup: [Prospect] = [] // ContextMenu-Hack1
 
     init() {
-        if let data = UserDefaults.standard.data(forKey: Self.saveKey) {
-            if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
-                self.people = decoded
-                return
-            }
-        }
+        let filename = getDocumentsDirectory().appendingPathComponent(Self.saveKey)
         
-        self.people = []
+        do {
+            let data = try Data(contentsOf: filename)
+            people = try JSONDecoder().decode([Prospect].self, from: data)
+        } catch {
+            
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
     
     private func save() {
-        if let encoded = try? JSONEncoder().encode(people) {
-            UserDefaults.standard.set(encoded, forKey: Self.saveKey)
+        let filename = getDocumentsDirectory().appendingPathComponent(Self.saveKey)
+        
+        do {
+            let data = try JSONEncoder().encode(self.people)
+            try data.write(to: filename, options: [.atomic])
+        } catch {
+            
         }
     }
     
