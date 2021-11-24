@@ -14,8 +14,14 @@ struct ProspectsView: View {
         case none, contacted, uncontacted
     }
     
+    enum ProspectsOrder {
+        case name, mostRecent
+    }
+    
     @EnvironmentObject var prospects: Prospects
     @State private var isShowingScanner = false
+    @State private var isShowingActionSheet = false
+
     let filter: FilterType
     
     var title: String {
@@ -76,16 +82,39 @@ struct ProspectsView: View {
             }
             .navigationTitle(title)
             .toolbar {
-                Button(action: {
-                    self.isShowingScanner = true
-                }) {
-                    Image(systemName: "qrcode.viewfinder")
-                    Text("Scan")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { isShowingActionSheet = true }) {
+                        Text("Sort")
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { isShowingScanner = true }) {
+                        Image(systemName: "qrcode.viewfinder")
+                        Text("Scan")
+                    }
                 }
             }
             .sheet(isPresented: $isShowingScanner) {
                 CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
             }
+            .actionSheet(isPresented: $isShowingActionSheet) {
+                ActionSheet(title: Text("Sort prospects by:"), buttons: [
+                    .default(Text("Name")) { sortProspects(by: .name) },
+                    .default(Text("Most recent")) { sortProspects(by: .mostRecent) },
+                    .cancel()
+                ])
+            }
+        }
+    }
+    
+    func sortProspects(by order: ProspectsOrder) {
+        switch order {
+        case .name:
+            print("Order prospects by name") // Develop proper sort function
+        case .mostRecent:
+            print("order prospects by most recent") // Develop proper sort function
         }
     }
     
