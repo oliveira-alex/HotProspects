@@ -13,11 +13,7 @@ struct ProspectsView: View {
     enum FilterType {
         case none, contacted, uncontacted
     }
-    
-    enum ProspectsOrder {
-        case name, mostRecent
-    }
-    
+
     @EnvironmentObject var prospects: Prospects
     @State private var isShowingScanner = false
     @State private var isShowingActionSheet = false
@@ -101,20 +97,11 @@ struct ProspectsView: View {
             }
             .actionSheet(isPresented: $isShowingActionSheet) {
                 ActionSheet(title: Text("Sort prospects by:"), buttons: [
-                    .default(Text("Name")) { sortProspects(by: .name) },
-                    .default(Text("Most recent")) { sortProspects(by: .mostRecent) },
+                    .default(Text("Name")) { prospects.sort(by: .name) },
+                    .default(Text("Most recent")) { prospects.sort(by: .mostRecent) },
                     .cancel()
                 ])
             }
-        }
-    }
-    
-    func sortProspects(by order: ProspectsOrder) {
-        switch order {
-        case .name:
-            print("Order prospects by name") // Develop proper sort function
-        case .mostRecent:
-            print("order prospects by most recent") // Develop proper sort function
         }
     }
     

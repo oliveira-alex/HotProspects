@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+enum ProspectsOrder {
+    case name, mostRecent
+}
+
 class Prospect: Identifiable, Codable {
     var id = UUID()
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
+    var addDate = Date()
 }
 
 class Prospects: ObservableObject {
@@ -67,5 +72,19 @@ class Prospects: ObservableObject {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
 //            self.people = self.peopleBackup
 //        }
+    }
+    
+    func sort(by order: ProspectsOrder) {
+        switch order {
+        case .name:
+            people.sort { lhs, rhs in
+                lhs.name < rhs.name
+            }
+        case .mostRecent:
+            people.sort { lhs, rhs in
+                lhs.addDate > rhs.addDate
+            }
+        }
+        save()
     }
 }
